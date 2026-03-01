@@ -1,0 +1,16 @@
+name = "cart-do"
+main = "src/CartDurableObject.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[durable_objects]
+bindings = [{ name = "CART_DO", class_name = "CartDurableObject" }]
+
+[[d1_databases]]
+binding = "EVENTS_DB"
+database_name = "ec-site-events-db"
+database_id = "placeholder-replace-with-actual-id"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["CartDurableObject"]

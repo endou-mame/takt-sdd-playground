@@ -1,0 +1,37 @@
+name = "ec-site-api"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "EVENTS_DB"
+database_name = "ec-site-events-db"
+# Replace with actual database_id after: wrangler d1 create ec-site-events-db
+database_id = "placeholder-replace-with-actual-id"
+
+[[r2_buckets]]
+binding = "IMAGE_BUCKET"
+bucket_name = "ec-site-images"
+
+[[durable_objects.bindings]]
+name = "CART_DO"
+class_name = "CartDurableObject"
+script_name = "cart-do"
+
+[[queues.producers]]
+binding = "EMAIL_QUEUE"
+queue = "ec-site-email-queue"
+
+[[queues.consumers]]
+queue = "ec-site-email-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+
+[vars]
+# Replace with actual secrets via: wrangler secret put <SECRET_NAME>
+JWT_SECRET = "replace-with-secure-random-secret"
+APP_BASE_URL = "https://your-app-domain.com"
+RESEND_API_KEY = "replace-with-resend-api-key"
+RESEND_FROM_ADDRESS = "noreply@your-app-domain.com"
+STRIPE_API_KEY = "replace-with-stripe-api-key"
+R2_PUBLIC_URL = "https://pub-replace.r2.dev"
